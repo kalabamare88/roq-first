@@ -1,27 +1,24 @@
 import "styles/globals.css";
-import { RoqProvider } from "@roq/ui-react";
+import { RoqProvider, ChatProvider } from "@roq/nextjs";
 import { clientConfig } from "config";
-import { SessionContext, SessionProvider } from "next-auth/react";
-import "@roq/ui-react/dist/index.css";
-
-
+import "@roq/nextjs/index.css";
 
 export default function App({ Component, pageProps }) {
-  return (
-      <SessionProvider>
-        <SessionContext.Consumer>
-          {({ data }) => (
-              <RoqProvider
-                  config={{
-                    host: clientConfig.roq.platformUrl,
-                    token: data?.user?.roqAccessToken,
-                    socket: true,
-                  }}
-              >
-                  <Component {...pageProps} />
-              </RoqProvider>
-          )}
-        </SessionContext.Consumer>
-      </SessionProvider>
-  );
+    /*
+      The ROQ provider sets the context for inner ROQ components to consume variables such as the session
+    */
+    return (
+        <RoqProvider
+            config={{
+                host: clientConfig.roq.platformUrl,
+                auth: {
+                    useRoqAuth: true,
+                },
+            }}
+        >
+            <ChatProvider>
+                <Component {...pageProps} />
+            </ChatProvider>
+        </RoqProvider>
+    );
 }

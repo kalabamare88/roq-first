@@ -1,3 +1,4 @@
+import * as yup from "yup";
 import { setConfig } from "next/config";
 
 export const clientConfig = Object.freeze({

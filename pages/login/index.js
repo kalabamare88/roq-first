@@ -7,14 +7,7 @@ const LoginPage = function () {
     return (
         <>
             <div className={styles.center}>
-                <img
-                    className={styles.logo}
-                    src="roq.svg"
-                    alt="ROQ Logo"
-                    width={300}
-                    height={500}
-                    priority
-                />
+
                 <div className={styles.buttonG} onClick={signUp}>
                     <a href="#">Register</a>
                 </div>
